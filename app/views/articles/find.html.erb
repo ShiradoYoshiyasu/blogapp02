@@ -1,0 +1,13 @@
+<h1>作成記事一覧</h1>
+
+<ul>
+  <% @articles.each do |article| %>
+  <li>
+    <%= link_to article.title, article_path(article.id) %>
+    <%= link_to "編集", edit_article_path(article.id) %>
+    <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+  </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "新規記事作成", new_article_path %></p>

@@ -8,6 +8,13 @@
 </head>
 <body>
 
+<span style="text-align: right">
+  <%= form_tag "/articles/find" do %>
+    <%= text_field_tag :search_string %>
+    <%= submit_tag "検索" %>
+  <% end %>
+</span>
+
 <%= yield %>
 
 <%= link_to "ホーム", articles_path %>

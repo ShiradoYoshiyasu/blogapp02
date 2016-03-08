@@ -34,6 +34,10 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
+  def find
+    @articles = Article.where(title: params[:search_string])
+  end
+
   private
 
   def article_params
