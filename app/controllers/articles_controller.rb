@@ -35,7 +35,8 @@ class ArticlesController < ApplicationController
   end
 
   def find
-    @articles = Article.where(title: params[:search_string])
+    search_string = params[:search_string]
+    @articles = Article.where("title LIKE '%" + search_string + "%'")
   end
 
   private
