@@ -11,5 +11,8 @@
   <% end %>
 </ul>
 
+<hr>
+<%= paginate @articles %>
+
 <p><%= link_to "新規記事作成", new_article_path %></p>
 <p><%= link_to "カテゴリー確認・編集", categories_path %></p>
