@@ -11,6 +11,9 @@
   <%= f.label :category_id %>
   <%= f.collection_select :category_id, Category.all, :id, :name %>
 </p>
+<p>
+  <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>
+</p>
 
 <p>
   <%= f.label :sentence %>
