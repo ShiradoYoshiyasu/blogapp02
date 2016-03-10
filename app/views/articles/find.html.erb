@@ -1,8 +1,8 @@
 <h1>作成記事一覧</h1>
 
+<p><%= params[:search_string] + "の検索結果" %></p>
 <ul>
   <% @articles.each do |article| %>
-  <p><%= params[:search_string] + "の検索結果" %></p>
   <li>
     <%= link_to article.title, article_path(article.id) %>
     <%= link_to "編集", edit_article_path(article.id) %>
