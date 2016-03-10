@@ -8,12 +8,27 @@
 </head>
 <body>
 
-<span style="text-align: right">
-  <%= form_tag "/articles/find" do %>
-    <%= text_field_tag :search_string %>
-    <%= submit_tag "検索" %>
-  <% end %>
-</span>
+<header>
+  <nav>
+    <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+    <% if user_signed_in? %>
+      <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+      <!-- *_path はUserモデルを作成したときに、deviseにより自動で作成されてますので、rake routesで確認できます -->
+      こんにちは <strong><%= current_user.email %></strong>さん。
+      <%= link_to 'プロフィール変更', edit_user_registration_path %> |
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "新規登録", new_user_registration_path %> |
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+  </nav>
+  <span style="text-align: right">
+    <%= form_tag "/articles/find" do %>
+      <%= text_field_tag :search_string %>
+      <%= submit_tag "検索" %>
+    <% end %>
+  </span>
+</header>
 
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
