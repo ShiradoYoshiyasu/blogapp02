@@ -1,0 +1,31 @@
+<%= form_for @article do |f| %>
+
+<p>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</p>
+
+<p>
+  <%= f.label :category_id %>
+  <%= f.collection_select :category_id, Category.all, :id, :name %>
+</p>
+
+<p>
+  <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>
+</p>
+
+<p>
+  <%= f.label :sentence %>
+  <%= f.text_area :sentence %>
+</p>
+
+<p>
+<%= f.label :picture %><br>
+<%= f.file_field :picture %>
+</p>
+
+<p>
+  <%= f.submit %>
+</p>
+
+<% end %>
