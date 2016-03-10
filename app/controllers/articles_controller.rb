@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
 
+  before_action :set_article, only:[:show, :edit, :update, :destroy]
+
   def index
     @articles = Article.page(params[:page]).per(10)
   end
 
   def show
-    @article = Article.find(params[:id])
   end
 
   def new
@@ -19,17 +20,14 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
     @article.update(article_params)
     redirect_to articles_path
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
     redirect_to articles_path
   end
@@ -45,4 +43,7 @@ class ArticlesController < ApplicationController
     params[:article].permit(:title, :category_id, :sentence, :picture)
   end
 
+  def set_article
+    @article = Article.find(params[:id])
+  end
 end
