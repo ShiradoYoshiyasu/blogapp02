@@ -3,10 +3,12 @@ class ArticlesController < ApplicationController
   before_action :set_article, only:[:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.includes(:category).page(params[:page]).per(10)
+    @articles = Article.includes(:category, :user).page(params[:page]).per(10)
   end
 
   def show
+    p params
+    p "あああああああああああああああああああああああああ"
   end
 
   def new
@@ -17,9 +19,13 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.save
     redirect_to articles_path
+    p article_params
+    p "あああああああああああああああああああああああああ"
   end
 
   def edit
+    p params
+    p "あああああああああああああああああああああああああ"
   end
 
   def update
@@ -29,12 +35,14 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
+    p params
+    p "あああああああああああああああああああああああああ"
     redirect_to articles_path
   end
 
   def find
-    search_string = params[:search_string]
-    @articles = Article.where('title LIKE ? or sentence LIKE ?', "%#{search_string}%", "%#{search_string}%")
+    q = params[:q]
+    @articles = Article.includes(:category, :user).where('category_id = ? and title LIKE ? or sentence LIKE ?',"#{q[:search_category]}", "%#{q[:search_string]}%", "%#{q[:search_string]}%")
   end
 
   private
@@ -46,4 +54,5 @@ class ArticlesController < ApplicationController
   def set_article
     @article = Article.find(params[:id])
   end
+
 end

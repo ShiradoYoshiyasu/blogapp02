@@ -10,10 +10,7 @@
 
 <header>
   <nav>
-    <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
     <% if user_signed_in? %>
-      <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
-      <!-- *_path はUserモデルを作成したときに、deviseにより自動で作成されてますので、rake routesで確認できます -->
       こんにちは <strong><%= current_user.email %></strong>さん。
       <%= link_to 'プロフィール変更', edit_user_registration_path %> |
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
@@ -24,7 +21,21 @@
   </nav>
   <span style="text-align: right">
     <%= form_tag "/articles/find" do %>
-      <%= text_field_tag :search_string %>
+      テキスト検索：<%= text_field_tag 'q[search_string]' %><br>
+      カテゴリー検索：
+      <!--
+      以下form_helperを使用して動的にする。おそらく以下のような記述-->
+      <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)) %><br>
+
+      <!--<select name = "search_category">
+        <option value = "5">日常</option>
+        <option value = "6">ビジネス</option>
+        <option value = "7">旅行</option>
+        <option value = "8">食事</option>
+        <option value = "9">英語圏</option>
+        <option value = "10">冠婚葬祭</option>
+        <option value = "11">晩年</option>
+      </select><br>-->
       <%= submit_tag "検索" %>
     <% end %>
   </span>
