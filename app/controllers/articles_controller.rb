@@ -4,12 +4,15 @@ class ArticlesController < ApplicationController
 
   def index
     q = params[:q]
+    search_mine = params[:search_mine]
     if q
       if q[:search_category] != ""
         @articles = Article.includes(:category, :user).where('category_id = ? and (title LIKE ? or sentence LIKE ?)',"#{q[:search_category]}", "%#{q[:search_string]}%", "%#{q[:search_string]}%").page(params[:page]).per(10)
       else
         @articles = Article.includes(:category, :user).where('title LIKE ? or sentence LIKE ?', "%#{q[:search_string]}%", "%#{q[:search_string]}%").page(params[:page]).per(10)
       end
+    elsif search_mine
+      @articles = Article.includes(:category, :user).where('user_id = ?', "#{search_mine}").page(params[:page]).per(10)
     else
       @articles = Article.includes(:category, :user).page(params[:page]).per(10)
     end
