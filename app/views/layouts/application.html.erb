@@ -14,7 +14,7 @@
   <nav>
     <div class="container">
       <% if user_signed_in? %>
-        こんにちは <strong><%= current_user.email %></strong>さん。
+        こんにちは <strong><%= current_user.name %></strong>さん。
         <%= link_to 'プロフィール変更', edit_user_registration_path %> |
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <% else %>
