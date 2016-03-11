@@ -3,7 +3,16 @@ class ArticlesController < ApplicationController
   before_action :set_article, only:[:show, :edit, :update, :destroy]
 
   def index
-    @articles = Article.includes(:category, :user).page(params[:page]).per(10)
+    q = params[:q]
+    if q
+      if q[:search_category] != ""
+        @articles = Article.includes(:category, :user).where('category_id = ? and (title LIKE ? or sentence LIKE ?)',"#{q[:search_category]}", "%#{q[:search_string]}%", "%#{q[:search_string]}%").page(params[:page]).per(10)
+      else
+        @articles = Article.includes(:category, :user).where('title LIKE ? or sentence LIKE ?', "%#{q[:search_string]}%", "%#{q[:search_string]}%").page(params[:page]).per(10)
+      end
+    else
+      @articles = Article.includes(:category, :user).page(params[:page]).per(10)
+    end
   end
 
   def show
@@ -35,14 +44,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    p params
-    p "あああああああああああああああああああああああああ"
     redirect_to articles_path
-  end
-
-  def find
-    q = params[:q]
-    @articles = Article.includes(:category, :user).where('category_id = ? and title LIKE ? or sentence LIKE ?',"#{q[:search_category]}", "%#{q[:search_string]}%", "%#{q[:search_string]}%")
   end
 
   private
