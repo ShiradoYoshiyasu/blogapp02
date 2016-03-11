@@ -6,6 +6,9 @@
       <%= link_to article.title, article_path(article.id) %>
       <%= article.category.name %>
       投稿者:<%= article.user.name %>
+      <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)/ %>
+       📎
+      <% end %>
       <!--以下書き方が助長だと思われる-->
       <% if user_signed_in? %>
         <% if article.user_id == current_user.id %>
