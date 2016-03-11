@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only:[:show, :edit, :update, :destroy]
 
   def index
+  #以下あまりにも助長なコード
     q = params[:q]
     search_mine = params[:search_mine]
     if q
