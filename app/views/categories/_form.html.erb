@@ -1,0 +1,15 @@
+<%= form_for @category do |f| %>
+
+<p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <% if @category.errors.messages[:name].any? %>
+  <%= @category.errors.messages[:name][0] %>
+  <% end %>
+</p>
+
+<p>
+  <%= f.submit %>
+</p>
+
+<% end %>

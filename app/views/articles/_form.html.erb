@@ -3,11 +3,17 @@
 <p>
   <%= f.label :title %>
   <%= f.text_field :title %>
+  <% if @article.errors.messages[:title].any? %>
+  <%= @article.errors.messages[:title][0] %>
+  <% end %>
 </p>
 
 <p>
   <%= f.label :category_id %>
   <%= f.collection_select :category_id, Category.all, :id, :name %>
+  <% if @article.errors.messages[:category_id].any? %>
+  <%= @article.errors.messages[:category_id][0] %>
+  <% end %>
 </p>
 
 <p>
@@ -17,6 +23,9 @@
 <p>
   <%= f.label :sentence %>
   <%= f.text_area :sentence %>
+  <% if @article.errors.messages[:sentence].any? %>
+  <%= @article.errors.messages[:sentence][0] %>
+  <% end %>
 </p>
 
 <p>

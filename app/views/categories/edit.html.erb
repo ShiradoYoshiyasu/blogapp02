@@ -1,14 +1,3 @@
 <h1>カテゴリー名編集</h1>
 
-<%= form_for @category do |f| %>
-
-<p>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</p>
-
-<p>
-  <%= f.submit %>
-</p>
-
-<% end %>
+<%= render 'form' %>
