@@ -5,7 +5,8 @@
     <li>
       <%= link_to article.title, article_path(article.id) %>
       <%= article.category.name %>
-      投稿者:<%= article.user.name %>
+      <!--以下のようなif文を各所に入れるべきなのか？-->
+      投稿者:<%= article.user.name if article.user_id.present? %>
       <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)/ %>
        📎
       <% end %>

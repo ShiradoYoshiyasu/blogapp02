@@ -26,15 +26,20 @@
   <span style="text-align: right">
     <div class="container">
       <div class="collapse navbar-collapse">
-      <!--以下アクションメソッドの指定を修正する必要あり-->
-        <%= form_tag "/articles/find" do %>
+      <!--
+      以下アクションメソッドの指定を修正する必要あり
+
+        form_tag "/articles/find" do → これなら一応POSTで送れる
+
+      -->
+        <%= form_tag("/articles", method: "get") do %>
           テキスト検索：<%= text_field_tag 'q[search_string]' %><br>
           カテゴリー検索：
           <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)), :include_blank => true %><br>
           <%= submit_tag "検索" %>
         <% end %>
         <% if user_signed_in? %>
-          <%= form_tag "/articles/find" do %>
+          <%= form_tag("/articles", method: "get") do %>
             <%= hidden_field_tag 'search_mine', current_user.id %>
             <%= submit_tag "my記事" %>
           <% end %>

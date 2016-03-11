@@ -5,4 +5,5 @@ class Article < ActiveRecord::Base
   validates :title, presence: { message: "タイトルを入力してください"}
   validates :sentence, presence: { message: "本文を入力してください"}
   validates :category_id, presence: { message: "カテゴリーを選択してください"}
+  validates :user_id, presence: { message: "ログインしてください"}
 end
