@@ -25,7 +25,7 @@
       カテゴリー検索：
       <!--
       以下form_helperを使用して動的にする。おそらく以下のような記述-->
-      <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)) %><br>
+      <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)), :include_blank => true %><br>
 
       <!--<select name = "search_category">
         <option value = "5">日常</option>
