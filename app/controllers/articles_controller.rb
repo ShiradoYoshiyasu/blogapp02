@@ -8,14 +8,14 @@ class ArticlesController < ApplicationController
     search_mine = params[:search_mine]
     if q
       if q[:search_category] != ""
-        @articles = Article.includes(:category, :user).where('category_id =  :category and (title LIKE :string or sentence LIKE :string)', category: "#{q[:search_category]}", string: "%#{q[:search_string]}%").page(params[:page]).per(10)
+        @articles = Article.includes(:category, :user).where('category_id =  :category and (title LIKE :string or sentence LIKE :string)', category: "#{q[:search_category]}", string: "%#{q[:search_string]}%").order("id DESC").page(params[:page]).per(10)
       else
-        @articles = Article.includes(:category, :user).where('title LIKE :string or sentence LIKE :string', string: "%#{q[:search_string]}%").page(params[:page]).per(10)
+        @articles = Article.includes(:category, :user).where('title LIKE :string or sentence LIKE :string', string: "%#{q[:search_string]}%").order("id DESC").page(params[:page]).per(10)
       end
     elsif search_mine
-      @articles = Article.includes(:category, :user).where('user_id = ?', "#{search_mine}").page(params[:page]).per(10)
+      @articles = Article.includes(:category, :user).where('user_id = ?', "#{search_mine}").order("id DESC").page(params[:page]).per(10)
     else
-      @articles = Article.includes(:category, :user).page(params[:page]).per(10)
+      @articles = Article.includes(:category, :user).order("id DESC").page(params[:page]).per(10)
     end
   end
 

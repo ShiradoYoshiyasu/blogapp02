@@ -1,9 +1,11 @@
 <h1><%= @article.title %></h1>
 
+  <h2>投稿者</h2>
+  <%= @article.user.name %><br>
   <h2>カテゴリー</h2>
   <%= @article.category.name %><br>
   <h2>本文</h2>
-  <%= @article.sentence %>
+  <%= @article.sentence %><br /><br />
   <p>
   <strong>Picture:</strong><br>
   <%= image_tag(@article.picture_url, width: 600) if @article.picture.present? %>
