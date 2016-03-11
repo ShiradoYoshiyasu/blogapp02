@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Taskapp</title>
+  <title>blogapp</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,38 +12,32 @@
 
 <header>
   <nav>
-    <% if user_signed_in? %>
-      こんにちは <strong><%= current_user.email %></strong>さん。
-      <%= link_to 'プロフィール変更', edit_user_registration_path %> |
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %> |
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+    <div class="container">
+      <% if user_signed_in? %>
+        こんにちは <strong><%= current_user.email %></strong>さん。
+        <%= link_to 'プロフィール変更', edit_user_registration_path %> |
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "新規登録", new_user_registration_path %> |
+        <%= link_to "ログイン", new_user_session_path %>
+      <% end %>
+    </div>
   </nav>
   <span style="text-align: right">
-    <%= form_tag "/articles/find" do %>
-      テキスト検索：<%= text_field_tag 'q[search_string]' %><br>
-      カテゴリー検索：
-      <!--
-      以下form_helperを使用して動的にする。おそらく以下のような記述-->
-      <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)), :include_blank => true %><br>
-
-      <!--<select name = "search_category">
-        <option value = "5">日常</option>
-        <option value = "6">ビジネス</option>
-        <option value = "7">旅行</option>
-        <option value = "8">食事</option>
-        <option value = "9">英語圏</option>
-        <option value = "10">冠婚葬祭</option>
-        <option value = "11">晩年</option>
-      </select><br>-->
-      <%= submit_tag "検索" %>
-    <% end %>
-    <%= form_tag "/articles/find" do %>
-      <%= hidden_field_tag 'search_mine', current_user.id %>
-      <%= submit_tag "my記事" %>
-    <% end %>
+    <div class="container">
+      <div class="collapse navbar-collapse">
+        <%= form_tag "/articles/find" do %>
+          テキスト検索：<%= text_field_tag 'q[search_string]' %><br>
+          カテゴリー検索：
+          <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)), :include_blank => true %><br>
+          <%= submit_tag "検索" %>
+        <% end %>
+        <%= form_tag "/articles/find" do %>
+          <%= hidden_field_tag 'search_mine', current_user.id %>
+          <%= submit_tag "my記事" %>
+        <% end %>
+      </div>
+    </div>
   </span>
 </header>
 
@@ -52,10 +48,17 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
-<%= link_to "ホーム", articles_path %>
-<p>Copyright (C) 2016 ShiradoYoshiyasu All Rights Reserved.</p>
+<footer>
+  <div class="container">
+    <%= link_to "ホーム", articles_path %>
+    <p>Copyright (C) 2016 ShiradoYoshiyasu All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 </body>
 </html>
