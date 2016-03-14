@@ -59,7 +59,7 @@ end
   end
 
   def update
-    if @article.update(article_params)
+    if @article.user_id == current_user.id && @article.update(article_params)
      redirect_to articles_path
    else
      render 'edit'
@@ -67,8 +67,12 @@ end
   end
 
   def destroy
-    @article.destroy
-    redirect_to articles_path
+    if @article.user_id == current_user.id
+      @article.destroy
+      redirect_to articles_path
+    else
+      render 'edit'
+    end
   end
 
   private
