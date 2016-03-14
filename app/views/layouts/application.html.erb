@@ -33,10 +33,7 @@
           <%= submit_tag "検索" %>
         <% end %>
         <% if user_signed_in? %>
-          <%= form_tag("/articles", method: "get") do %>
-            <%= hidden_field_tag 'search_mine', current_user.id %>
-            <%= submit_tag "my記事" %>
-          <% end %>
+          <%= link_to 'my記事', controller: "articles", action: "index", user_id: 0 %>
         <% end %>
       </div>
     </div>
