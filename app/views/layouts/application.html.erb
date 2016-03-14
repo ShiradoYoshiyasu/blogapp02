@@ -30,6 +30,8 @@
           テキスト検索：<%= text_field_tag 'q[search_string]' %><br>
           カテゴリー検索：
           <%= select_tag 'q[search_category]', options_for_select(Category.all.pluck(:name, :id)), :include_blank => true %><br>
+          my記事絞り込み：
+          <%= select_tag 'q[search_user]', options_for_select('全ての記事' => "n", 'my記事のみ' => "y") %><br>
           <%= submit_tag "検索" %>
         <% end %>
         <% if user_signed_in? %>

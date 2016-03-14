@@ -4,16 +4,11 @@ class ArticlesController < ApplicationController
 
 def index
   q = params[:q]
-  search_mine = current_user&.id
-  if q && (q[:search_category] || q[:search_string])
+  if q && (q[:search_category] || q[:search_string] || q[:search_user])
     @articles = Article.includes(:category, :user)
     .search_by_category(q[:search_category])
     .search_by_string(q[:search_string])
-    .order("id DESC")
-    .page(params[:page]).per(10)
-  elsif params[:user_id] == '0'
-    @articles = Article.includes(:category, :user)
-    .search_by_user(search_mine)
+    .search_by_user(q[:search_user], current_user&.id)
     .order("id DESC")
     .page(params[:page]).per(10)
   else

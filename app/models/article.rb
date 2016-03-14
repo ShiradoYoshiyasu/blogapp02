@@ -9,6 +9,6 @@ class Article < ActiveRecord::Base
 
   scope :search_by_category, ->(category){where('category_id = ?', category) if category.present?}
   scope :search_by_string, -> (string){where('title LIKE :string or sentence LIKE :string', string: "%#{string}%" ) if string.present?}
-  scope :search_by_user, -> (user){where('user_id = ?', user) if user.present?}
+  scope :search_by_user, -> (user, self_id){where('user_id = ?', self_id) if user == "y"}
 
 end
