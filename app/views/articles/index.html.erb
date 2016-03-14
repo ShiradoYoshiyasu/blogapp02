@@ -4,18 +4,14 @@
     <% @articles.each do |article| %>
     <li>
       <%= link_to article.title, article_path(article.id) %>
-      <%= article.category.name %>
-      <!--以下のようなif文を各所に入れるべきなのか？-->
-      投稿者:<%= article.user.name if article.user_id.present? %>
+      <%= article.category&.name %>
+      投稿者:<%= article.user&.name %>
       <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)/ %>
        📎
       <% end %>
-      <!--以下書き方が助長だと思われる-->
-      <% if user_signed_in? %>
-        <% if article.user_id == current_user.id %>
-          <%= link_to "編集", edit_article_path(article.id) %>
-          <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-        <% end %>
+      <% if article.user_id == current_user&.id %>
+        <%= link_to "編集", edit_article_path(article.id) %>
+        <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
       <% end %>
     </li>
     <% end %>

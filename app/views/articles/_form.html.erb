@@ -36,8 +36,10 @@
 <p>
   <% if user_signed_in? %>
     <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.submit %>
+  <% else %>
+    ログインしてください
   <% end %>
-  <%= f.submit %>
 </p>
 
 <% end %>

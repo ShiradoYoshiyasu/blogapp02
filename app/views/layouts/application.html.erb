@@ -26,12 +26,6 @@
   <span style="text-align: right">
     <div class="container">
       <div class="collapse navbar-collapse">
-      <!--
-      以下アクションメソッドの指定を修正する必要あり
-
-        form_tag "/articles/find" do → これなら一応POSTで送れる
-
-      -->
         <%= form_tag("/articles", method: "get") do %>
           テキスト検索：<%= text_field_tag 'q[search_string]' %><br>
           カテゴリー検索：
