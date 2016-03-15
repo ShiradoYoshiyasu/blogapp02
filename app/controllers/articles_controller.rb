@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 
   before_action :set_article, only:[:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only:[:edit, :update, :new]
 
 def index
   q = params[:q]
@@ -83,6 +84,12 @@ end
 
   def set_article
     @article = Article.find(params[:id])
+  end
+
+  def logged_in_user
+    unless user_signed_in?
+      redirect_to new_user_registration_path
+    end
   end
 
 end

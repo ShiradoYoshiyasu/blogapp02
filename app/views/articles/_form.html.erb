@@ -1,45 +1,45 @@
 <%= form_for @article do |f| %>
 
-<p>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <% if @article.errors.messages[:title].any? %>
-  <%= @article.errors.messages[:title][0] %>
-  <% end %>
-</p>
+    <p>
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title %>
+      <% if @article.errors.messages[:title].any? %>
+          <%= @article.errors.messages[:title][0] %>
+      <% end %>
+    </p>
 
-<p>
-  <%= f.label :category_id %>
-  <%= f.collection_select :category_id, Category.all, :id, :name , :include_blank => true %>
-  <% if @article.errors.messages[:category_id].any? %>
-  <%= @article.errors.messages[:category_id][0] %>
-  <% end %>
-</p>
+    <p>
+      <%= f.label :category_id, "カテゴリー" %>
+      <%= f.collection_select :category_id, Category.all, :id, :name , :include_blank => true %>
+      <% if @article.errors.messages[:category_id].any? %>
+          <%= @article.errors.messages[:category_id][0] %>
+      <% end %>
+    </p>
 
-<p>
-  <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>
-</p>
+    <p>
+      <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>
+    </p>
 
-<p>
-  <%= f.label :sentence %>
-  <%= f.text_area :sentence %>
-  <% if @article.errors.messages[:sentence].any? %>
-  <%= @article.errors.messages[:sentence][0] %>
-  <% end %>
-</p>
+    <p>
+      <%= f.label :sentence, "本文" %>
+      <%= f.text_area :sentence %>
+      <% if @article.errors.messages[:sentence].any? %>
+          <%= @article.errors.messages[:sentence][0] %>
+      <% end %>
+    </p>
 
-<p>
-<%= f.label :picture %><br>
-<%= f.file_field :picture %>
-</p>
+    <p>
+      <%= f.label :picture, "画像" %><br>
+      <%= f.file_field :picture %>
+    </p>
 
-<p>
-  <% if user_signed_in? %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.submit %>
-  <% else %>
-    ログインしてください
-  <% end %>
-</p>
+    <p>
+      <% if user_signed_in? %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.submit %>
+      <% else %>
+          ログインしてください
+      <% end %>
+    </p>
 
 <% end %>
