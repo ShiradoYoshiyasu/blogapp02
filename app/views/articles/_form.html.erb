@@ -15,6 +15,15 @@
           <%= @article.errors.messages[:category_id][0] %>
       <% end %>
     </p>
+    
+    <div id = "result">
+      <% @title = Article.all %>
+      <% @title.each do |f| %>
+       <%= f.title %>
+      <% end %>
+    </div>
+
+    <%= link_to '更新', uptitle_articles_path, remote: true %>
 
     <p>
       <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>

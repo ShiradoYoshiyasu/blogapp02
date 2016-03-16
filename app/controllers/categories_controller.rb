@@ -1,5 +1,10 @@
 class CategoriesController < ApplicationController
 
+=begin  def upcate
+    @categories = Category.all
+  end
+=end
+
   def index
     @categories = Category.page(params[:page]).per(5)
   end

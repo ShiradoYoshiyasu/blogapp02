@@ -3,6 +3,11 @@ class ArticlesController < ApplicationController
   before_action :set_article, only:[:show, :edit, :update, :destroy]
   before_action :logged_in_user, only:[:edit, :update, :new]
 
+def uptitle
+  p "いいいいいいいいいいいいいいいいいいいい"
+  @title = Article.all
+end
+
 def index
   q = params[:q]
   if q && (q[:search_category] || q[:search_string] || q[:search_user])
