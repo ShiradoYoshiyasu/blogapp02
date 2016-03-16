@@ -5,6 +5,10 @@ class CategoriesController < ApplicationController
   end
 =end
 
+  def upname
+    @categories = Category.all
+  end
+
   def index
     @categories = Category.page(params[:page]).per(5)
   end

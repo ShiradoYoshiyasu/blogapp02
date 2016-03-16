@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :articles do
-    get :uptitle, on: :collection
-  end
+  resources :articles
   root 'articles#index'
-  resources :categories
+  resources :categories do
+    get :upname, on: :collection
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
