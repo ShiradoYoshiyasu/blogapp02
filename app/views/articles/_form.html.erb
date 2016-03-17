@@ -17,18 +17,14 @@
     </p>
 
     <div id = "result">
-      <% @categories = Category.all %>
-      aaaaaaa
-      <% @categories.each do |f| %>
+      <% @category_names = Category.all %>
+      <% @category_names.each do |f| %>
        <%= f.name %>
       <% end %>
     </div>
 
     <%= link_to '更新', upname_categories_path, remote: true %>
-
-    <p>
-      <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>
-    </p>
+    <br><br>
 
     <p>
       <%= f.label :sentence, "本文" %>
@@ -52,4 +48,18 @@
       <% end %>
     </p>
 
+<% end %>
+
+<p>
+  <%= link_to "新規カテゴリー追加", new_category_path,:target=>["_blank"] %>
+</p>
+
+<% @upcategory = Category.new %>
+<%= form_for(@upcategory, :url => {:controller => 'categories', :action => 'upcreate'}, :remote => true) do |f| %>
+<p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+  <div id = "create_result">before</div>
+</p>
 <% end %>

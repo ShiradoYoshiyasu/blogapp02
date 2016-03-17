@@ -4,9 +4,13 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 =end
+  def upcreate
+    @category = Category.new(category_params)
+    @category.save
+  end
 
   def upname
-    @categories = Category.all
+    @category_names = Category.all
   end
 
   def index

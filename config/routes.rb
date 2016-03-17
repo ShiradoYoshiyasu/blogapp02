@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :articles
   root 'articles#index'
   resources :categories do
-    get :upname, on: :collection
+    collection do
+      get 'upname'
+      post 'upcreate'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
