@@ -1,4 +1,3 @@
-console.log("hello, world")
-$('#create_result').html(
-"<% if @category.errors.messages[:name].any? %><%= @category.errors.messages[:name][0] %><% else %><p>成功しました</p><% end %>"
+$('#result').html(
+"<% @category_names.each do |f| %><%= f.name %><% end %>"
 );

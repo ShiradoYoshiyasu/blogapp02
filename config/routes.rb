@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root 'articles#index'
   resources :categories do
     collection do
-      get 'upname'
       post 'upcreate'
     end
   end
