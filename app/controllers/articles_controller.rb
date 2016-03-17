@@ -19,27 +19,6 @@ def index
   end
 end
 
-=begin
-
-  def index
-  #以下あまりにも助長なコード
-    q = params[:q]
-    search_mine = params[:search_mine]
-    if q
-      if q[:search_category] != ""
-        @articles = Article.includes(:category, :user).where('category_id =  :category and (title LIKE :string or sentence LIKE :string)', category: "#{q[:search_category]}", string: "%#{q[:search_string]}%").order("id DESC").page(params[:page]).per(10)
-      else
-        @articles = Article.includes(:category, :user).where('title LIKE :string or sentence LIKE :string', string: "%#{q[:search_string]}%").order("id DESC").page(params[:page]).per(10)
-      end
-    elsif search_mine
-      @articles = Article.includes(:category, :user).where('user_id = ?', "#{search_mine}").order("id DESC").page(params[:page]).per(10)
-    else
-      @articles = Article.includes(:category, :user).order("id DESC").page(params[:page]).per(10)
-    end
-  end
-
-=end
-
   def show
   end
 
@@ -48,7 +27,6 @@ end
   end
 
   def create
-    p "あああああああああああああああああああああ"
     @article = Article.new(article_params)
     if @article.save
       redirect_to articles_path
@@ -58,10 +36,14 @@ end
   end
 
   def edit
+    if @article.user_id != current_user&.id
+      destroy_user_session_path
+      redirect_to new_user_session_path
+    end
   end
 
   def update
-    if @article.user_id == current_user.id && @article.update(article_params)
+    if @article.user_id == current_user&.id && @article.update(article_params)
      redirect_to articles_path
    else
      render 'edit'
@@ -69,11 +51,11 @@ end
   end
 
   def destroy
-    if @article.user_id == current_user.id
+    if @article.user_id != current_user&.id
+      redirect_to new_user_session_path
+    else
       @article.destroy
       redirect_to articles_path
-    else
-      render 'edit'
     end
   end
 
