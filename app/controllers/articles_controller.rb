@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
 
   before_action :set_article, only:[:show, :edit, :update, :destroy]
   before_action :logged_in_user, only:[:edit, :update, :new]
+  before_action :different_user, only:[:edit, :update, :destroy]
 
 def index
   q = params[:q]
@@ -24,6 +25,7 @@ end
 
   def new
     @article = Article.new
+    @category_names = Category.all.pluck(:name)
   end
 
   def create
@@ -36,14 +38,11 @@ end
   end
 
   def edit
-    if @article.user_id != current_user&.id
-      destroy_user_session_path
-      redirect_to new_user_session_path
-    end
+    @category_names = Category.all.pluck(:name)
   end
 
   def update
-    if @article.user_id == current_user&.id && @article.update(article_params)
+    if @article.update(article_params)
      redirect_to articles_path
    else
      render 'edit'
@@ -51,12 +50,8 @@ end
   end
 
   def destroy
-    if @article.user_id != current_user&.id
-      redirect_to new_user_session_path
-    else
-      @article.destroy
-      redirect_to articles_path
-    end
+    @article.destroy
+    redirect_to articles_path
   end
 
   private
@@ -74,5 +69,12 @@ end
       redirect_to new_user_registration_path
     end
   end
+
+  def different_user
+    if @article.user_id != current_user&.id
+      redirect_to articles_path
+    end
+  end
+
 
 end
