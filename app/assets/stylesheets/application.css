@@ -18,3 +18,4 @@ body { padding-top: 10px; }
 footer { margin-top: 30px; }
 table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
+#search { padding-top: 50px; }

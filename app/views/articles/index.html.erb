@@ -1,5 +1,7 @@
 <h1>投稿記事一覧</h1>
 
+<div class="row">
+       <div class="col-md-6">
 <ul>
     <% @articles.each do |article| %>
     <li>
@@ -16,6 +18,8 @@
     </li>
     <% end %>
 </ul>
+</div>
+</div>
 
 <hr>
 <%= paginate @articles %>

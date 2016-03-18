@@ -1,12 +1,15 @@
 <h1><%= @article.title %></h1>
-
-<h2><%= label :user_id, "投稿者" %></h2>
-<%= @article.user&.name %><br>
-<h2><%= label :category_id, "カテゴリー" %></h2>
-<%= @article.category&.name %><br>
-<h2><%= label :sentence, "本文" %></h2>
-<%= @article.sentence %><br /><br />
-<p>
-  <strong><%= label :picture, "画像" %></strong><br>
-  <%= image_tag(@article.picture_url, width: 600) if @article.picture.present? %>
-</p>
+<div class="row">
+  <div class="col-md-9">
+    <h2><%= label :user_id, "投稿者" %></h2>
+    <%= @article.user&.name %><br>
+    <h2><%= label :category_id, "カテゴリー" %></h2>
+    <%= @article.category&.name %><br>
+    <h2><%= label :sentence, "本文" %></h2>
+    <%= @article.sentence %><br /><br />
+    <% if @article.picture.present? %>
+      <h2><%= label :picture, "画像" %><h2><br>
+      <%= image_tag(@article.picture_url, width: 600)%>
+    <% end %>
+  </div>
+</div>
