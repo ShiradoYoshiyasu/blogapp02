@@ -64,7 +64,7 @@
           my記事絞り込み：
           <%= select_tag 'q[search_user]', options_for_select('全ての記事' => "n", 'my記事のみ' => "y") %><br>
         <% end %>
-        <%= submit_tag "検索" %>
+        <%= submit_tag "検索", :class => "btn btn-primary btn-xs" %>
       <% end %>
     </div>
   </span>

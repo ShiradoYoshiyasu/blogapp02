@@ -1,3 +1,5 @@
+<p id = "notice"><%= notice %></p>
+
 <h1>投稿記事一覧</h1>
 
 <div class="row">
@@ -8,7 +10,7 @@
       <%= link_to article.title, article_path(article.id) %>
       <%= article.category&.name %>
       投稿者:<%= article.user&.name %>
-      <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)/ %>
+      <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)$/ %>
        📎
       <% end %>
       <% if article.user_id == current_user&.id %>

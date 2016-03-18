@@ -66,13 +66,13 @@ end
 
   def logged_in_user
     unless user_signed_in?
-      redirect_to new_user_registration_path
+      redirect_to new_user_registration_path, notice: 'サービス利用のためにはログインしてください'
     end
   end
 
   def different_user
     if @article.user_id != current_user&.id
-      redirect_to articles_path
+      redirect_to articles_path, notice: '権限のない記事のためアクセスできません'
     end
   end
 
