@@ -12,11 +12,11 @@ def index
     .search_by_string(q[:search_string])
     .search_by_user(q[:search_user], current_user&.id)
     .order("id DESC")
-    .page(params[:page]).per(10)
+    .page(params[:page]).per(9)
   else
     @articles = Article.includes(:category, :user)
     .order("id DESC")
-    .page(params[:page]).per(10)
+    .page(params[:page]).per(9)
   end
 end
 

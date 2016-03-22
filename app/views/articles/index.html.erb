@@ -1,26 +1,29 @@
 <p id = "notice"><%= notice %></p>
 
-<h1>投稿記事一覧</h1>
+<h1 style="text-align: center;">投稿記事一覧</h1>
 
 <div class="row">
-       <div class="col-md-6">
 <ul>
     <% @articles.each do |article| %>
+      <div class="col-xs-6 col-lg-4" style="padding-bottom: 20px;">
     <li>
+      <h4>
       <%= link_to article.title, article_path(article.id) %>
-      <%= article.category&.name %>
-      投稿者:<%= article.user&.name %>
       <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)$/ %>
        📎
       <% end %>
+    </h4>
+      カテゴリー:<%= article.category&.name %><br>
+      投稿者:<%= article.user&.name %>
       <% if article.user_id == current_user&.id %>
         <%= link_to "編集", edit_article_path(article.id) %>
         <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
       <% end %>
+        </div>
     </li>
     <% end %>
+
 </ul>
-</div>
 </div>
 
 <hr>
