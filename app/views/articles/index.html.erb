@@ -3,27 +3,24 @@
 <h1 style="text-align: center;">投稿記事一覧</h1>
 
 <div class="row">
-<ul>
     <% @articles.each do |article| %>
-      <div class="col-xs-6 col-lg-4" style="padding-bottom: 20px;">
-    <li>
+      <div class="col-xs-6 col-lg-4" style="height: 180px;">
       <h4>
+      <% if article.picture? %>
+      <%= link_to image_tag(article.picture_url(:thumb)), article_path(article.id) %>
+      <% else %>
+      <%= link_to image_tag('noimage.png', :size => '50x50'), article_path(article.id) %>
+      <% end %>
       <%= link_to article.title, article_path(article.id) %>
-      <% if "#{article.picture}" =~ /.*(.png|.jpg|.gif)$/ %>
-       📎
-      <% end %>
     </h4>
-      カテゴリー:<%= article.category&.name %><br>
-      投稿者:<%= article.user&.name %>
-      <% if article.user_id == current_user&.id %>
-        <%= link_to "編集", edit_article_path(article.id) %>
-        <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-      <% end %>
-        </div>
-    </li>
+    <% if article.user_id == current_user&.id %>
+      <%= link_to "編集", edit_article_path(article.id) %>
+      <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %><br>
     <% end %>
-
-</ul>
+      カテゴリー:<%= article.category&.name %><br>
+      投稿者:<%= article.user&.name %><br>
+        </div>
+    <% end %>
 </div>
 
 <hr>
