@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
 
   before_action :set_article, only:[:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only:[:edit, :update, :new]
-  before_action :different_user, only:[:edit, :update, :destroy]
+  before_action :check_logged_in, only:[:edit, :update, :new]
+  before_action :back_different_user, only:[:edit, :update, :destroy]
 
 def index
   q = params[:q]
@@ -64,13 +64,13 @@ end
     @article = Article.find(params[:id])
   end
 
-  def logged_in_user
+  def check_logged_in
     unless user_signed_in?
       redirect_to new_user_registration_path, notice: 'サービス利用のためにはログインしてください'
     end
   end
 
-  def different_user
+  def back_different_user
     if @article.user_id != current_user&.id
       redirect_to articles_path, notice: '権限のない記事のためアクセスできません'
     end
