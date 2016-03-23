@@ -25,25 +25,23 @@ end
 
   def new
     @article = Article.new
-    @category_names = Category.all.pluck(:name)
   end
 
   def create
     @article = Article.new(article_params)
     if @article.save
-      redirect_to articles_path
+      redirect_to articles_path, notice: '記事を追加しました'
     else
       render 'new'
     end
   end
 
   def edit
-    @category_names = Category.all.pluck(:name)
   end
 
   def update
     if @article.update(article_params)
-     redirect_to articles_path
+     redirect_to articles_path, notice: '記事を更新しました'
    else
      render 'edit'
    end
@@ -75,6 +73,5 @@ end
       redirect_to articles_path, notice: '権限のない記事のためアクセスできません'
     end
   end
-
 
 end

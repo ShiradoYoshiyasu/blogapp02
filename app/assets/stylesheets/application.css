@@ -14,7 +14,9 @@
  *= require_self
  */
 
-body { padding-top: 10px; }
+body {
+  padding-top: 10px;
+}
 footer {
   background-color: #ebebeb;
   padding: 10px 0;

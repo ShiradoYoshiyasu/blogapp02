@@ -10,7 +10,7 @@
 
     <p>
       <%= f.label :category_id, "カテゴリー" %>
-      <%= f.select(:category_id, options_for_select(Category.all.pluck(:name, :id)), {id: 'result'}) %>
+      <%= f.select(:category_id, options_for_select(Category.all.pluck(:name, :id)), {class: 'result'}) %>
       <% if @article.errors.messages[:category_id].any? %>
           <%= @article.errors.messages[:category_id][0] %>
       <% end %>
@@ -36,6 +36,15 @@
           ログインしてください
       <% end %>
     </p>
+
   <%= f.submit %>
-</p>
+
 <% end %>
+
+<br>
+<p>カテゴリー追加</p>
+<%= form_tag("/categories", method: "post", :remote => true) do %>
+  <%= text_field_tag 'category[name]' %>
+  <%= submit_tag "登録" %>
+<% end %>
+<div id="result"></div><br>

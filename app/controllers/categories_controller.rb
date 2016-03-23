@@ -1,25 +1,24 @@
 class CategoriesController < ApplicationController
 
-=begin  def upcate
-    @categories = Category.all
+  def create
+    @category = Category.new(category_params)
+    respond_to do |format|
+      if @category.save
+        format.html { redirect_to categories_path, notice: 'カテゴリーを追加しました' }
+        format.js {}
+      else
+        format.html { render 'new'}
+        format.js {}
+      end
+    end
   end
-=end
 
   def index
-    @categories = Category.page(params[:page]).per(5)
+    @categories = Category.page(params[:page]).per(5).order("id")
   end
 
   def new
     @category = Category.new
-  end
-
-  def create
-    @category = Category.new(category_params)
-    if @category.save
-      redirect_to categories_path
-    else
-      render 'new'
-    end
   end
 
   def edit
@@ -29,7 +28,7 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
     if @category.update(category_params)
-      redirect_to categories_path
+      redirect_to categories_path, notice: 'カテゴリーを更新しました'
     else
       render 'new'
     end
@@ -38,7 +37,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to categories_path
+    redirect_to categories_path, notice: 'カテゴリーを削除しました'
   end
 
   private

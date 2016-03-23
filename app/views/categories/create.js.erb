@@ -1,0 +1,11 @@
+var errors = '<%= @category.errors.messages[:name][0] %>';
+if(errors){
+  $('#result').html(errors);
+} else {
+  var cat = document.getElementById('article_category_id');
+  var opt = document.createElement('option');
+  opt.appendChild( document.createTextNode('<%= @category.name %>') );
+  opt.value = '<%= @category.id %>';
+  cat.appendChild(opt);
+  $('#result').html("カテゴリーを追加しました");
+}
