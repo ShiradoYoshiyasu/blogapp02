@@ -1,6 +1,8 @@
-var errors = '<%= @category.errors.messages[:name][0] %>';
-if(errors){
-  $('#result').html(errors);
+var result = new Boolean('<%= @category.errors.any? %>');
+if('<%= @category.errors.any? %>' == 'true'){
+<% @category.errors.full_messages.each do |msg| %>
+$('#result').html('<%= msg %>');
+<% end %>
 } else {
   var cat = document.getElementById('article_category_id');
   var opt = document.createElement('option');

@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
 
   before_action :set_article, only:[:show, :edit, :update, :destroy]
   before_action :check_logged_in, only:[:edit, :update, :new]
-  before_action :back_different_user, only:[:edit, :update, :destroy]
+  before_action :return_different_user, only:[:edit, :update, :destroy]
 
 def index
   q = params[:q]
@@ -68,7 +68,7 @@ end
     end
   end
 
-  def back_different_user
+  def return_different_user
     if @article.user_id != current_user&.id
       redirect_to articles_path, notice: '権限のない記事のためアクセスできません'
     end
