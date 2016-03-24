@@ -1,12 +1,12 @@
-if('<%= @category.errors.any? %>' == 'true'){
+<% if @category.errors.any? %>
   <% @category.errors.full_messages.each do |msg| %>
     $('#result').html('<%= msg %>');
   <% end %>
-} else {
+<% else %>
   var cat = document.getElementById('article_category_id');
   var opt = document.createElement('option');
   opt.appendChild( document.createTextNode('<%= @category.name %>') );
   opt.value = '<%= @category.id %>';
   cat.appendChild(opt);
   $('#result').html("カテゴリーを追加しました");
-}
+<% end %>

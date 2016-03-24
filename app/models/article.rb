@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
             length: { maximum: 30, message:"本文は30字以内にしてください" },
             uniqueness: { scope: [:user_id], message:"過去に同一タイトルの投稿があります"}
   validates :sentence, presence: { message: "本文を入力してください"},
-            length: { in: 10..100, message:"本文は10字以上100字以内にしてください" }
+            length: { in: 10..1000, message:"本文は10字以上1000字以内にしてください" }
   validates :category_id, presence: { message: "カテゴリーを選択してください"}
 
   scope :search_by_category, -> (category){where('category_id = ?', category) if category.present?}
