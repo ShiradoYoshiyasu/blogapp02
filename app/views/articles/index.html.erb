@@ -1,5 +1,12 @@
 <h1 style="text-align: center;">投稿記事一覧</h1>
 
+<% if params[:q] %>
+  <%= "[カテゴリー：#{Category.find(params[:q][:search_category]).name}]" unless params[:q][:search_category].empty? %>
+  <%= "[#{params[:q][:search_string]}]" unless params[:q][:search_string].empty? %>
+  <%= "[my記事のみ]" if params[:q][:search_user] == "y" %>
+  の検索結果
+<% end %>
+
 <div class="row">
     <% @articles.each do |article| %>
       <div class="col-xs-6 col-lg-4" style="height: 180px;">
