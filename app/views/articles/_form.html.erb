@@ -4,7 +4,7 @@
       <%= f.label :title, "タイトル" %>
       <%= f.text_field :title %>
       <% if @article.errors.messages[:title].any? %>
-          <%= @article.errors.messages[:title][0] %>
+        <%= @article.errors.messages[:title][0] %>
       <% end %>
     </p>
 
@@ -12,7 +12,7 @@
       <%= f.label :category_id, "カテゴリー" %>
       <%= f.select(:category_id, options_for_select(Category.all.pluck(:name, :id)), {class: 'result'}) %>
       <% if @article.errors.messages[:category_id].any? %>
-          <%= @article.errors.messages[:category_id][0] %>
+        <%= @article.errors.messages[:category_id][0] %>
       <% end %>
     </p>
 
@@ -20,7 +20,7 @@
       <%= f.label :sentence, "本文" %>
       <%= f.text_area :sentence %>
       <% if @article.errors.messages[:sentence].any? %>
-          <%= @article.errors.messages[:sentence][0] %>
+        <%= @article.errors.messages[:sentence][0] %>
       <% end %>
     </p>
 
@@ -31,9 +31,9 @@
 
     <p>
       <% if user_signed_in? %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
       <% else %>
-          ログインしてください
+        ログインしてください
       <% end %>
     </p>
 

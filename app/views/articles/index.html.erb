@@ -3,21 +3,21 @@
 <div class="row">
     <% @articles.each do |article| %>
       <div class="col-xs-6 col-lg-4" style="height: 180px;">
-      <h4>
-      <% if article.picture? %>
-      <%= link_to image_tag(article.picture_url(:thumb)), article_path(article.id) %>
-      <% else %>
-      <%= link_to image_tag('noimage.png', :size => '50x50'), article_path(article.id) %>
-      <% end %>
-      <%= link_to article.title, article_path(article.id) %>
-    </h4>
-    <% if article.user_id == current_user&.id %>
-      <%= link_to "編集", edit_article_path(article.id) %>
-      <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %><br>
-    <% end %>
-      カテゴリー:<%= article.category&.name %><br>
-      投稿者:<%= article.user&.name %><br>
-        </div>
+      <h2 style="font-size: 20px;">
+        <% if article.picture? %>
+          <%= link_to image_tag(article.picture_url(:thumb)), article_path(article.id) %>
+        <% else %>
+          <%= link_to image_tag('noimage.png', :size => '50x50'), article_path(article.id) %>
+        <% end %>
+        <%= link_to article.title, article_path(article.id) %>
+      </h2>
+        <% if article.user_id == current_user&.id %>
+          <%= link_to "編集", edit_article_path(article.id) %>
+          <%= link_to "削除", article_path(article.id), method: :delete, data: {confirm: "本当に削除しますか？"} %><br>
+        <% end %>
+        カテゴリー:<%= article.category&.name %><br>
+        投稿者:<%= article.user&.name %><br>
+      </div>
     <% end %>
 </div>
 

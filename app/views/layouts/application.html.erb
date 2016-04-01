@@ -46,7 +46,7 @@
           <% if user_signed_in? %>
             こんにちは <strong><%= current_user.name %></strong>さん　
           <% end %>
-        </div>
+          </div>
         </div>
       </div>
     </div>
@@ -73,12 +73,14 @@
   </span>
 </header>
 
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
+<div class="container">
+  <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+</div>
 
 <div class="container">
   <%= yield %>

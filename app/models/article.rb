@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
   belongs_to :user
   mount_uploader :picture, PictureUploader
   validates :title, presence: { message: "タイトルを入力してください"},
-            length: { maximum: 30, message:"本文は30字以内にしてください" },
+            length: { maximum: 20, message:"タイトルは20字以内にしてください" },
             uniqueness: { scope: [:user_id], message:"過去に同一タイトルの投稿があります"}
   validates :sentence, presence: { message: "本文を入力してください"},
             length: { in: 10..1000, message:"本文は10字以上1000字以内にしてください" }
